@@ -23,23 +23,23 @@ namespace B15_Ex01_1
                     i++;
                 }
                 else {
-                    Console.WriteLine("this is not a valid number! let's try again");
+                    Console.WriteLine("This is not a valid number! let's try again");
                 }
             }
 
             // convert to binary representation
             for (int index = 0; index < arrayOfInputs.Length; index++)
 			{
-			    string stringRepresentor = null;
+			    StringBuilder stringRepresentor = new StringBuilder();
                 int currentNumberToCovert = arrayOfInputs[index];
                 int remainder;
                 while (currentNumberToCovert > 0)
                 {
                     remainder = currentNumberToCovert % 2;
                     currentNumberToCovert /= 2;
-                    stringRepresentor = remainder.ToString() + stringRepresentor;
+                    stringRepresentor.Append(remainder.ToString());
                 }
-                inputsAsBinaryRepresentation[index] = stringRepresentor;
+                inputsAsBinaryRepresentation[index] = stringRepresentor.ToString();
 			}
 
             // print binary representation
