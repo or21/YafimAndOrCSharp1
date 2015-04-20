@@ -19,7 +19,7 @@ namespace B15_Ex01_1
                 string intAsString = System.Console.ReadLine();
                 Boolean isNumber = int.TryParse(intAsString, out arrayOfInputs[i]);
 
-                if ((isNumber) && (intAsString.Length == 3)) {
+                if ((isNumber) && (intAsString.Length == 3) && (arrayOfInputs[i] > 0)) {
                     i++;
                 }
                 else {
@@ -27,20 +27,22 @@ namespace B15_Ex01_1
                 }
             }
 
+            // convert to binary representation
             for (int index = 0; index < arrayOfInputs.Length; index++)
 			{
 			    string stringRepresentor = null;
-                int currentNumberToChange = arrayOfInputs[index];
+                int currentNumberToCovert = arrayOfInputs[index];
                 int remainder;
-                while (currentNumberToChange > 0)
+                while (currentNumberToCovert > 0)
                 {
-                    remainder = currentNumberToChange % 2;
-                    currentNumberToChange /= 2;
+                    remainder = currentNumberToCovert % 2;
+                    currentNumberToCovert /= 2;
                     stringRepresentor = remainder.ToString() + stringRepresentor;
                 }
                 inputsAsBinaryRepresentation[index] = stringRepresentor;
 			}
 
+            // print binary representation
             foreach (var binRepresentation in inputsAsBinaryRepresentation)
             {
                 Console.WriteLine(binRepresentation.ToString());
