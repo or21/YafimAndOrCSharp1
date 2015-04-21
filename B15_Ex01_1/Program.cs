@@ -60,6 +60,7 @@ namespace B15_Ex01_1
             Console.WriteLine("The avarage of inputs: {0}", avarageOfinputs);
             Console.WriteLine("Number of ones : {0}", numberOfOnes);
             Console.WriteLine("Number of zeros : {0}", numberOfZeros);
+            Console.WriteLine("Press enter to exit");
             Console.ReadLine();
         }
 

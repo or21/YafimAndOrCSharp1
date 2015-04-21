@@ -8,13 +8,14 @@ namespace B15_Ex01_2
 {
     public class Program
     {
-        static void Main() {
+        public static void Main() {
             string result = string.Format(@"*****
  ***
   *
  ***
 *****");
             Console.WriteLine(result);
+            Console.WriteLine("Press enter to exit");
             Console.ReadLine();
         }
     }
