@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace B15_Ex01_1
 {
     public class Program
     {
-        static void Main()
+        public static void Main()
         {
             int[] arrayOfInputs = new int[5];
-            string[] inputsAsBinaryRepresentation = new String[5];
             int i = 0;
             while (i < 5)
             {   
                 Console.WriteLine("Please enter number with 3 digits (and then press enter):");
-                string intAsString = System.Console.ReadLine();
-                Boolean isNumber = int.TryParse(intAsString, out arrayOfInputs[i]);
+                string intAsString = Console.ReadLine();
+                bool isNumber = int.TryParse(intAsString, out arrayOfInputs[i]);
 
-                if ((isNumber) && (intAsString.Length == 3) && (arrayOfInputs[i] > 0)) {
+                if (intAsString != null && ((isNumber) && (intAsString.Length == 3) && (arrayOfInputs[i] > 0))) {
                     i++;
                 }
                 else {
@@ -28,26 +24,33 @@ namespace B15_Ex01_1
             }
 
             // convert to binary representation
-            for (int index = 0; index < arrayOfInputs.Length; index++)
-			{
-			    StringBuilder stringRepresentor = new StringBuilder();
-                int currentNumberToCovert = arrayOfInputs[index];
-                int remainder;
-                while (currentNumberToCovert > 0)
-                {
-                    remainder = currentNumberToCovert % 2;
-                    currentNumberToCovert /= 2;
-                    stringRepresentor.Append(remainder.ToString());
-                }
-                inputsAsBinaryRepresentation[index] = stringRepresentor.ToString();
-			}
+            string[] inputsAsBinaryRepresentation = intToBinary(arrayOfInputs);
 
             // print binary representation
-            foreach (var binRepresentation in inputsAsBinaryRepresentation)
+            foreach (string binRepresentation in inputsAsBinaryRepresentation)
             {
-                Console.WriteLine(binRepresentation.ToString());
+                Console.WriteLine(binRepresentation);
             }
-            System.Console.ReadLine();
+            Console.ReadLine();
+        }
+
+        private static string[] intToBinary(int[] i_ArrayOfInputs)
+        {
+            string[] inputsAsBinaryRepresentation = new string[i_ArrayOfInputs.Length];
+            for (int i = 0; i < i_ArrayOfInputs.Length; i++)
+            {
+                StringBuilder stringRepresentor = new StringBuilder();
+                int currentNumberToConvert = i_ArrayOfInputs[i];
+                while (currentNumberToConvert > 0)
+                {
+                    int remainder = currentNumberToConvert % 2;
+                    currentNumberToConvert /= 2;
+                    stringRepresentor.Insert(0, remainder.ToString());
+                }
+               
+                inputsAsBinaryRepresentation[i] = stringRepresentor.ToString();
+            }
+            return inputsAsBinaryRepresentation;
         }
     }
 }
