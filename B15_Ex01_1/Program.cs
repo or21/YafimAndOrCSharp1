@@ -48,7 +48,7 @@ namespace B15_Ex01_1
                 Console.WriteLine(binRepresentation);
             }
             Console.WriteLine("Number of increasing numbers: {0}", numberOfIncreasingNumbers);
-            Console.WriteLine("Number of increasing numbers: {0}", numberOfDecreasingNumbers);
+            Console.WriteLine("Number of Decreasing numbers: {0}", numberOfDecreasingNumbers);
             Console.WriteLine("The avarage of inputs: {0}", avarageOfinputs);
             Console.ReadLine();
         }
@@ -106,7 +106,6 @@ namespace B15_Ex01_1
                 {
                     if (previousDigit > currentDigit)
                     {
-                        previousDigit = currentDigit;
                         i_NumberToCheck /= 10;
                     }
                     else
@@ -118,7 +117,6 @@ namespace B15_Ex01_1
                 {
                     if (previousDigit < currentDigit)
                     {
-                        previousDigit = currentDigit;
                         i_NumberToCheck /= 10;
                     }
                     else
@@ -126,6 +124,7 @@ namespace B15_Ex01_1
                         return false;
                     }
                 }
+                previousDigit = currentDigit;
             }
             return true;
         }
