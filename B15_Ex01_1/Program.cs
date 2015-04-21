@@ -110,29 +110,22 @@ namespace B15_Ex01_1
 
         private static bool isStritclySequecne(int i_NumberToCheck, bool i_Operation)
         {
-            int previousDigit = i_NumberToCheck % 10;
-            i_NumberToCheck /= 10;
-            while (i_NumberToCheck > 0)
+            int[] numberAsArray = numberToIntArray(i_NumberToCheck);
+            int previousDigit = numberAsArray[0];
+
+            for (int i = 1; i < numberAsArray.Length; i++)
             {
-                int currentDigit = i_NumberToCheck % 10;
+                int currentDigit = numberAsArray[i];
                 if (i_Operation)
                 {
-                    if (previousDigit > currentDigit)
-                    {
-                        i_NumberToCheck /= 10;
-                    }
-                    else
+                    if (!(previousDigit > currentDigit))
                     {
                         return false;
                     }
                 }
                 else
                 {
-                    if (previousDigit < currentDigit)
-                    {
-                        i_NumberToCheck /= 10;
-                    }
-                    else
+                    if (!(previousDigit < currentDigit))
                     {
                         return false;
                     }
@@ -140,6 +133,17 @@ namespace B15_Ex01_1
                 previousDigit = currentDigit;
             }
             return true;
+        }
+
+        private static int[] numberToIntArray(int i_NumberToCheck)
+        {
+            int[] numberAsArray = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                numberAsArray[i] = i_NumberToCheck % 10;
+                i_NumberToCheck /= 10;
+            }
+            return numberAsArray;
         }
 
         //count digits
