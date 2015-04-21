@@ -14,6 +14,8 @@ namespace B15_Ex01_1
             int numberOfDecreasingNumbers = 0;
             decimal avarageOfinputs = 0;
             const bool v_Increasing = true;
+            int numberOfOnes = 0;
+            int numberOfZeros = 0;
 
             // get the input from the user
             getInputFromUser(numberOfInputs, out arrayOfInputs);
@@ -42,6 +44,12 @@ namespace B15_Ex01_1
                 avarageOfinputs = (decimal) arrayOfInputs.Sum() / arrayOfInputs.Length;
             }
 
+            //count zeros and ones in the array
+            for (int i = 0; i < numberOfInputs; i++)
+            {
+                numberOfZerosAndOnes(inputsAsBinaryRepresentation[i], ref numberOfOnes, ref numberOfZeros);
+            }
+
             // print binary representation
             foreach (string binRepresentation in inputsAsBinaryRepresentation)
             {
@@ -50,6 +58,8 @@ namespace B15_Ex01_1
             Console.WriteLine("Number of increasing numbers: {0}", numberOfIncreasingNumbers);
             Console.WriteLine("Number of increasing numbers: {0}", numberOfDecreasingNumbers);
             Console.WriteLine("The avarage of inputs: {0}", avarageOfinputs);
+            Console.WriteLine("Number of ones : {0}", numberOfOnes);
+            Console.WriteLine("Number of zeros : {0}", numberOfZeros);
             Console.ReadLine();
         }
 
@@ -128,6 +138,23 @@ namespace B15_Ex01_1
                 }
             }
             return true;
+        }
+
+        //count zeros and ones in given binary string
+        private static void numberOfZerosAndOnes(string i_BinaryNumber, ref int io_numberOfOnes, ref int io_numberOfZeros)
+        {
+
+            for (int i = 0; i < i_BinaryNumber.Length; i++)
+            {
+                if (i_BinaryNumber[i].Equals((char)'0'))
+                {
+                    io_numberOfZeros++;
+                }
+                else
+                {
+                    io_numberOfOnes++;
+                }
+            }
         }
 
     }
