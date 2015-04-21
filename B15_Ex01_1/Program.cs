@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace B15_Ex01_1
@@ -11,7 +12,8 @@ namespace B15_Ex01_1
             int[] arrayOfInputs;
             int numberOfIncreasingNumbers = 0;
             int numberOfDecreasingNumbers = 0;
-            bool increasing = true;
+            decimal avarageOfinputs = 0;
+            const bool v_Increasing = true;
 
             // get the input from the user
             getInputFromUser(numberOfInputs, out arrayOfInputs);
@@ -22,19 +24,23 @@ namespace B15_Ex01_1
             // finds number of increasing numbers
             for (int i = 0; i < numberOfInputs; i++)
             {
-                if (isStritclySequecne(arrayOfInputs[i], increasing))
+                if (isStritclySequecne(arrayOfInputs[i], v_Increasing))
                 {
                     numberOfIncreasingNumbers++;
                 }
             }
             for (int i = 0; i < numberOfInputs; i++)
             {
-                if (isStritclySequecne(arrayOfInputs[i], !increasing))
+                if (isStritclySequecne(arrayOfInputs[i], !v_Increasing))
                 {
                     numberOfDecreasingNumbers++;
                 }
             }
 
+            if (arrayOfInputs != null)
+            {
+                avarageOfinputs = (decimal) arrayOfInputs.Sum() / arrayOfInputs.Length;
+            }
 
             // print binary representation
             foreach (string binRepresentation in inputsAsBinaryRepresentation)
@@ -43,6 +49,7 @@ namespace B15_Ex01_1
             }
             Console.WriteLine("Number of increasing numbers: {0}", numberOfIncreasingNumbers);
             Console.WriteLine("Number of increasing numbers: {0}", numberOfDecreasingNumbers);
+            Console.WriteLine("The avarage of inputs: {0}", avarageOfinputs);
             Console.ReadLine();
         }
 
@@ -94,7 +101,6 @@ namespace B15_Ex01_1
             i_NumberToCheck /= 10;
             while (i_NumberToCheck > 0)
             {
-                
                 int currentDigit = i_NumberToCheck % 10;
                 if (i_Operation)
                 {
@@ -123,5 +129,6 @@ namespace B15_Ex01_1
             }
             return true;
         }
+
     }
 }
