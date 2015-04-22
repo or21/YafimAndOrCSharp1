@@ -12,14 +12,18 @@ namespace B15_Ex01_3
             int levelsAsInt;
             
             Console.WriteLine("Please enter the number of levels in sand watch (then press enter):");
+
+            // gets a valid input number from the user
             getNumberFromUser(out levelsAsInt);
 
+            // prints the sand watch according to the number. 
             if (levelsAsInt == 5)
             {
                 B15_Ex01_2.Program.Main();
             }
             else
             {
+                // if the number is even, adds 1 and print the sand watch
                 bool isEven = (levelsAsInt % 2) == 0;
                 Console.WriteLine(isEven ? drawSandWatch(levelsAsInt + 1) : drawSandWatch(levelsAsInt));
             }
@@ -27,6 +31,10 @@ namespace B15_Ex01_3
             Console.ReadLine();
         }
 
+        /*
+         * Create a string of sand watch according to the i_NumberOfLevels. 
+         * i_NumberOfLevels must be an odd number.
+         */ 
         private static string drawSandWatch(int i_NumberOfLevels)
         {
             int numberOfSpaces = 0;
@@ -64,6 +72,9 @@ namespace B15_Ex01_3
             return finalSandWatch.ToString();
         }
 
+        /*
+         * Get a valid positive integer from the user.
+         */
         private static void getNumberFromUser(out int o_LevelsAsInt)
         {
             int levelsAsInt = 0;

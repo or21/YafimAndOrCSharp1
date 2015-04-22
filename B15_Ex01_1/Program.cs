@@ -14,7 +14,7 @@ namespace B15_Ex01_1
             int numberOfDecreasingNumbers = 0;
             decimal avarageOfinputs = 0;
             const bool v_Increasing = true;
-            int numberOfBinaryDigits = 0;
+            int totalNumberOfBinaryDigits = 0;
             decimal avarageBinaryDigits = 0;
 
             // get the input from the user
@@ -23,50 +23,56 @@ namespace B15_Ex01_1
             // convert to binary representation
             string[] inputsAsBinaryRepresentation = intToBinary(arrayOfInputs);
 
-            // finds number of increasing numbers
+            // finds number of ascending sequences
             for (int i = 0; i < numberOfInputs; i++)
             {
-                if (isStritclySequecne(arrayOfInputs[i], v_Increasing))
+                if (isStrictlySequecne(arrayOfInputs[i], v_Increasing))
                 {
                     numberOfIncreasingNumbers++;
                 }
             }
+
+            // finds number of descending sequences
             for (int i = 0; i < numberOfInputs; i++)
             {
-                if (isStritclySequecne(arrayOfInputs[i], !v_Increasing))
+                if (isStrictlySequecne(arrayOfInputs[i], !v_Increasing))
                 {
                     numberOfDecreasingNumbers++;
                 }
             }
 
+            // calculates the avarage of the input numbers
             if (arrayOfInputs != null)
             {
                 avarageOfinputs = (decimal) arrayOfInputs.Sum() / arrayOfInputs.Length;
             }
 
-            //count number of binary digits
+            // count number of binary digits
             for (int i = 0; i < numberOfInputs; i++)
             {
-                countBinaryDigits(inputsAsBinaryRepresentation[i], ref numberOfBinaryDigits);
+                totalNumberOfBinaryDigits += inputsAsBinaryRepresentation[i].Length;
                 if (i + 1 == numberOfInputs)
                 {
-                    avarageBinaryDigits = (decimal) numberOfBinaryDigits / numberOfInputs;
-            }
+                    avarageBinaryDigits = (decimal) totalNumberOfBinaryDigits / numberOfInputs;
+                }
             }
 
-            // print binary representation
-            foreach (string binRepresentation in inputsAsBinaryRepresentation)
-            {
-                Console.WriteLine(binRepresentation);
-            }
-            Console.WriteLine("Number of increasing numbers: {0}", numberOfIncreasingNumbers);
-            Console.WriteLine("Number of Decreasing numbers: {0}", numberOfDecreasingNumbers);
-            Console.WriteLine("The avarage of inputs: {0}", avarageOfinputs);
-            Console.WriteLine("The avarage of binary digits: {0}", avarageBinaryDigits);
+            // create the result that will be printed to the screen
+            string resultOfProgram = string.Format(@"The binary numbers are: {0} {1} {2} {3} {4}.
+There are {5} numbers which are an ascending series and {6} which are descending.
+The general avarege of the inserted numbers is {7}.
+The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepresentation[0], inputsAsBinaryRepresentation[1], 
+                                                          inputsAsBinaryRepresentation[2], inputsAsBinaryRepresentation[3], 
+                                                          inputsAsBinaryRepresentation[4], numberOfIncreasingNumbers, 
+                                                          numberOfDecreasingNumbers, avarageOfinputs, avarageBinaryDigits);
+            Console.WriteLine(resultOfProgram);
+            Console.WriteLine("Please press 'Enter' to exit...");
             Console.ReadLine();
         }
 
-        // ReSharper disable once InconsistentNaming
+        /*
+         * This method recives i_NumberOfInputs of 3 digits numbers and return them as array of integers
+         */
         private static void getInputFromUser(int i_NumberOfInputs, out int[] o_ArrayOfInputs)
         {
             int i = 0;
@@ -89,6 +95,9 @@ namespace B15_Ex01_1
             }
         }
 
+        /*
+         * This method recieves an array of integers and return an array of strings of their binary forms
+         */
         private static string[] intToBinary(int[] i_ArrayOfInputs)
         {
             string[] inputsAsBinaryRepresentation = new string[i_ArrayOfInputs.Length];
@@ -102,13 +111,18 @@ namespace B15_Ex01_1
                     currentNumberToConvert /= 2;
                     stringRepresentor.Insert(0, remainder.ToString());
                 }
-               
+
                 inputsAsBinaryRepresentation[i] = stringRepresentor.ToString();
             }
             return inputsAsBinaryRepresentation;
         }
 
-        private static bool isStritclySequecne(int i_NumberToCheck, bool i_Operation)
+        /*
+         * This method checks according to the i_Operation if a 3 digits number is Ascending to Descending series
+         * If i_Operation is true the method will look for strictly Ascending series.
+         * If i_Operation is false the method will look for strictly Descending series.
+         */
+        private static bool isStrictlySequecne(int i_NumberToCheck, bool i_Operation)
         {
             int[] numberAsArray = numberToIntArray(i_NumberToCheck);
             int previousDigit = numberAsArray[0];
@@ -135,6 +149,9 @@ namespace B15_Ex01_1
             return true;
         }
 
+        /*
+         * This method convert an integer to array of 3 integers where each element represent a digit in the number
+         */
         private static int[] numberToIntArray(int i_NumberToCheck)
         {
             int[] numberAsArray = new int[3];
@@ -144,15 +161,6 @@ namespace B15_Ex01_1
                 i_NumberToCheck /= 10;
             }
             return numberAsArray;
-        }
-
-        //count digits
-        private static void countBinaryDigits(string i_BinaryNumber, ref int io_NumberOfBinaryDigits)
-        {
-            for (int i = 0; i < i_BinaryNumber.Length; i++)
-            {
-                io_NumberOfBinaryDigits++;
-            }
         }
 
     }
