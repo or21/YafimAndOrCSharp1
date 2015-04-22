@@ -9,6 +9,8 @@ namespace B15_Ex01_2
     public class Program
     {
         public static void Main() {
+
+            // creates 5 rows of sand watch
             string result = string.Format(@"*****
  ***
   *
