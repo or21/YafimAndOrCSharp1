@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Program.cs" company="B15_Ex01">
+// <copyright file="Program.cs" company="B15_Ex01_5">
 // Yafim Vodkov 308973882 Or Brand id
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,7 +9,7 @@ using System.Linq;
 namespace B15_Ex01_5
 {
     /// <summary>
-    /// this is header
+    /// Problem 5
     /// </summary>
     public class Program
     {

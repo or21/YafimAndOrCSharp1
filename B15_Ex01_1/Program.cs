@@ -1,11 +1,22 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="B15_Ex01_1">
+// Yafim Vodkov 308973882 Or Brand id
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Linq;
 using System.Text;
 
 namespace B15_Ex01_1
 {
+    /// <summary>
+    /// Problem 1
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Runs the program.
+        /// </summary>
         public static void Main()
         {
             int numberOfInputs = 5;
@@ -70,9 +81,11 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
             Console.ReadLine();
         }
 
-        /*
-         * This method recives i_NumberOfInputs of 3 digits numbers and return them as array of integers
-         */
+        /// <summary>
+        /// This method receives i_NumberOfInputs of 3 digits numbers and return them as array of integers
+        /// </summary>
+        /// <param name="i_NumberOfInputs">number of inputs</param>
+        /// <param name="o_ArrayOfInputs">the array of inputs</param>
         private static void getInputFromUser(int i_NumberOfInputs, out int[] o_ArrayOfInputs)
         {
             int i = 0;
@@ -84,7 +97,7 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
                 string intAsString = Console.ReadLine();
                 bool isNumber = int.TryParse(intAsString, out o_ArrayOfInputs[i]);
 
-                if (intAsString != null && ((isNumber) && (intAsString.Length == 3) && (o_ArrayOfInputs[i] > 0)))
+                if (intAsString != null && (isNumber && (intAsString.Length == 3) && (o_ArrayOfInputs[i] > 0)))
                 {
                     i++;
                 }
@@ -95,9 +108,11 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
             }
         }
 
-        /*
-         * This method recieves an array of integers and return an array of strings of their binary forms
-         */
+        /// <summary>
+        /// This method receives an array of integers and return an array of strings of their binary forms
+        /// </summary>
+        /// <param name="i_ArrayOfInputs">array of inputs</param>
+        /// <returns>string as binary form</returns>
         private static string[] intToBinary(int[] i_ArrayOfInputs)
         {
             string[] inputsAsBinaryRepresentation = new string[i_ArrayOfInputs.Length];
@@ -114,14 +129,18 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
 
                 inputsAsBinaryRepresentation[i] = stringRepresentor.ToString();
             }
+
             return inputsAsBinaryRepresentation;
         }
 
-        /*
-         * This method checks according to the i_Operation if a 3 digits number is Ascending to Descending series
-         * If i_Operation is true the method will look for strictly Ascending series.
-         * If i_Operation is false the method will look for strictly Descending series.
-         */
+        /// <summary>
+        /// This method checks according to the i_Operation if a 3 digits number is Ascending to Descending series
+        /// If i_Operation is true the method will look for strictly Ascending series.
+        /// If i_Operation is false the method will look for strictly Descending series.
+        /// </summary>
+        /// <param name="i_NumberToCheck">The number to check</param>
+        /// <param name="i_Operation">flag for operation</param>
+        /// <returns>if ascending or descending series</returns>
         private static bool isStrictlySequecne(int i_NumberToCheck, bool i_Operation)
         {
             int[] numberAsArray = numberToIntArray(i_NumberToCheck);
@@ -144,14 +163,18 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
                         return false;
                     }
                 }
+
                 previousDigit = currentDigit;
             }
+
             return true;
         }
 
-        /*
-         * This method convert an integer to array of 3 integers where each element represent a digit in the number
-         */
+        /// <summary>
+        /// This method convert an integer to array of 3 integers where each element represent a digit in the number
+        /// </summary>
+        /// <param name="i_NumberToCheck">number to check</param>
+        /// <returns>integer array of binary numbers</returns>
         private static int[] numberToIntArray(int i_NumberToCheck)
         {
             int[] numberAsArray = new int[3];
@@ -160,8 +183,8 @@ The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepres
                 numberAsArray[i] = i_NumberToCheck % 10;
                 i_NumberToCheck /= 10;
             }
+
             return numberAsArray;
         }
-
     }
 }
