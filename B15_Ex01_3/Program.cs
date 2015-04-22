@@ -1,12 +1,23 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="B15_Ex01_3">
+// Yafim Vodkov 308973882 Or Brand id
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace B15_Ex01_3
 {
+    /// <summary>
+    /// Problem 3
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// runs the program.
+        /// </summary>
         public static void Main()
         {
             int levelsAsInt;
@@ -27,14 +38,17 @@ namespace B15_Ex01_3
                 bool isEven = (levelsAsInt % 2) == 0;
                 Console.WriteLine(isEven ? drawSandWatch(levelsAsInt + 1) : drawSandWatch(levelsAsInt));
             }
+
             Console.WriteLine("Press enter to exit");
             Console.ReadLine();
         }
 
-        /*
-         * Create a string of sand watch according to the i_NumberOfLevels. 
-         * i_NumberOfLevels must be an odd number.
-         */ 
+        /// <summary>
+        /// Create a string of sand watch according to the i_NumberOfLevels. 
+        /// i_NumberOfLevels must be an odd number.
+        /// </summary>
+        /// <param name="i_NumberOfLevels">number of levels</param>
+        /// <returns>sand watch representation</returns>
         private static string drawSandWatch(int i_NumberOfLevels)
         {
             int numberOfSpaces = 0;
@@ -48,6 +62,7 @@ namespace B15_Ex01_3
                 {
                     finalSandWatch.Append(" ");
                 }
+
                 for (int j = 0; j < numberOfDots; j++)
                 {
                     finalSandWatch.Append("*");
@@ -63,18 +78,22 @@ namespace B15_Ex01_3
                     numberOfSpaces -= 2;
                     numberOfDots += 2;
                 }
+
                 if (numberOfDots == 1)
                 {
                     isBeforeHalf = false;
                 }
+
                 finalSandWatch.Append(Environment.NewLine);
             }
+
             return finalSandWatch.ToString();
         }
 
-        /*
-         * Get a valid positive integer from the user.
-         */
+        /// <summary>
+        /// Get a valid positive integer from the user.
+        /// </summary>
+        /// <param name="o_LevelsAsInt">number of levels</param>
         private static void getNumberFromUser(out int o_LevelsAsInt)
         {
             int levelsAsInt = 0;
@@ -83,7 +102,7 @@ namespace B15_Ex01_3
             {
                 string levelsAsString = Console.ReadLine();
                 bool isNumber = int.TryParse(levelsAsString, out levelsAsInt);
-                if (levelsAsString != null && ((isNumber) && (levelsAsInt > 0)))
+                if ((levelsAsString != null) && isNumber && (levelsAsInt > 0))
                 {
                     isGoodNumber = true;
                 }
@@ -92,6 +111,7 @@ namespace B15_Ex01_3
                     Console.WriteLine("This is not a valid number! let's try again");
                 }
             }
+
             o_LevelsAsInt = levelsAsInt;
         }
     }
