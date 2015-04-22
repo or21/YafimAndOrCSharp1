@@ -66,8 +66,7 @@ namespace B15_Ex01_5
             for (int i = 1; i < i_StringOfNumbers.Length; i++)
             {
                 numberToCompare = getNumValue(i_StringOfNumbers[i]);
-                
-         //       Console.WriteLine("THE EQ IS : {0} < {1}", numberToCompare, i_StringOfNumbers[0]);
+
                 if (numberToCompare > firstNumber)
                 {
                       s_NumbersGreaterThanFirst++;
