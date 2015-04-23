@@ -29,10 +29,13 @@ namespace B15_Ex01_4
         {
             string inputFromUser = getInputFromUser();
 
-            string resultOfProgram = string.Format(@"Does the program is palindroime: {0}.
+            string resultOfProgram = string.Format(
+@"Does the program is palindroime: {0}.
 The sum of the digits if the input contains just digits: {1}.
 The amount of chars that are camel case if the input contains just letters: {2}.", 
-            isPalindrome(inputFromUser), s_SumOfNumbersInString, s_SumOfCamelInString);
+            isPalindrome(inputFromUser), 
+            s_SumOfNumbersInString, 
+            s_SumOfCamelInString);
             
             Console.WriteLine(resultOfProgram);
             Console.WriteLine("Please press 'Enter' to exit...");

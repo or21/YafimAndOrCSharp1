@@ -69,13 +69,20 @@ namespace B15_Ex01_1
             }
 
             // create the result that will be printed to the screen
-            string resultOfProgram = string.Format(@"The binary numbers are: {0} {1} {2} {3} {4}.
+            string resultOfProgram = string.Format(
+@"The binary numbers are: {0} {1} {2} {3} {4}.
 There are {5} numbers which are an ascending series and {6} which are descending.
 The general avarege of the inserted numbers is {7}.
-The avarege number of digits in the binary number is {8}.", inputsAsBinaryRepresentation[0], inputsAsBinaryRepresentation[1], 
-                                                          inputsAsBinaryRepresentation[2], inputsAsBinaryRepresentation[3], 
-                                                          inputsAsBinaryRepresentation[4], numberOfIncreasingNumbers, 
-                                                          numberOfDecreasingNumbers, avarageOfinputs, avarageBinaryDigits);
+The avarege number of digits in the binary number is {8}.", 
+                                                          inputsAsBinaryRepresentation[0], 
+                                                          inputsAsBinaryRepresentation[1], 
+                                                          inputsAsBinaryRepresentation[2], 
+                                                          inputsAsBinaryRepresentation[3], 
+                                                          inputsAsBinaryRepresentation[4], 
+                                                          numberOfIncreasingNumbers, 
+                                                          numberOfDecreasingNumbers, 
+                                                          avarageOfinputs, 
+                                                          avarageBinaryDigits);
             Console.WriteLine(resultOfProgram);
             Console.WriteLine("Please press 'Enter' to exit...");
             Console.ReadLine();
