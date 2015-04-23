@@ -32,52 +32,55 @@ namespace B15_Ex01_4
             string resultOfProgram = string.Format(
 @"Does the program is palindroime: {0}.
 The sum of the digits if the input contains just digits: {1}.
-The amount of chars that are camel case if the input contains just letters: {2}.", 
-            isPalindrome(inputFromUser), 
-            s_SumOfNumbersInString, 
+The amount of chars that are camel case if the input contains just letters: {2}.",
+            isPalindrome(inputFromUser),
+            s_SumOfNumbersInString,
             s_SumOfCamelInString);
-            
+
             Console.WriteLine(resultOfProgram);
             Console.WriteLine("Please press 'Enter' to exit...");
             Console.ReadLine();
         }
 
         /// <summary>
-        /// check if valid string was given
+        /// check if valid string was given. if valid, sum all camel cases / numbers in it.
         /// </summary>
         /// <param name="i_InputFromUser">string to check</param>
         /// <returns>true if valid string</returns>
         private static bool isValidString(string i_InputFromUser)
         {
-            if (i_InputFromUser.Length != 10)
-            {
-                return false;
-            }
+            bool isValidString = false;
 
-            bool isValidString = true;
-            bool containsNumbers = char.IsNumber(i_InputFromUser[0]);
-
-            for (int i = 0; i < 10 && isValidString; i++)
+            if (i_InputFromUser.Length == 10)
             {
-                if (containsNumbers)
+                isValidString = true;
+
+                // determine what first char is
+                bool containsNumbers = char.IsNumber(i_InputFromUser[0]);
+
+                for (int i = 0; i < 10 && isValidString; i++)
                 {
-                    if (char.IsNumber(i_InputFromUser[i]))
+                    // if contains only numbers, sum them. Otherwise error.
+                    if (containsNumbers)
                     {
-                        double numericValue = char.GetNumericValue(i_InputFromUser[i]);
-                        s_SumOfNumbersInString += Convert.ToInt32(numericValue);
+                        if (char.IsNumber(i_InputFromUser[i]))
+                        {
+                            s_SumOfNumbersInString += getNumValue(i_InputFromUser[i]);
+                        }
+                        else
+                        {
+                            isValidString = false;
+                        }
                     }
                     else
                     {
-                        return false;
-                    }
-                }
-                else
-                {
-                    isValidString = isValidChar(i_InputFromUser[i]);
-
-                    if (char.IsUpper(i_InputFromUser[i]))
-                    {
-                        s_SumOfCamelInString++;
+                        isValidString = isValidChar(i_InputFromUser[i]);
+                        
+                        // sum all the camel cases in string.
+                        if (char.IsUpper(i_InputFromUser[i]))
+                        {
+                            s_SumOfCamelInString++;
+                        }
                     }
                 }
             }
@@ -141,6 +144,17 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         {
             string reversedString = reverseString(i_String);
             return reversedString.Equals(i_String);
+        }
+
+        /// <summary>
+        /// get numerical value from char
+        /// </summary>
+        /// <param name="i_CharToNumericValue">char to convert</param>
+        /// <returns> char to integer </returns>
+        private static int getNumValue(char i_CharToNumericValue)
+        {
+            double numericValue = char.GetNumericValue(i_CharToNumericValue);
+            return Convert.ToInt32(numericValue);
         }
     }
 }
