@@ -31,6 +31,7 @@ namespace B15_Ex01_5
             string inputFromUser = getInput();
             countGreaterAndSmallerNumbers(inputFromUser);
 
+            // input user is valid, get minimum and maximum values from it.
             char minValue = inputFromUser.Min();
             char maxValue = inputFromUser.Max();
 

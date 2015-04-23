@@ -22,7 +22,8 @@ namespace B15_Ex01_2
         public static void Main() 
         {
             // creates 5 rows of sand watch
-            string result = string.Format(@"*****
+            string result = string.Format(
+@"*****
  ***
   *
  ***
