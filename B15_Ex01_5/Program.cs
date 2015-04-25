@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Program.cs" company="B15_Ex01_5">
-// Yafim Vodkov 308973882 Or Brand id
+// Yafim Vodkov 308973882 Or Brand 302521034
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
@@ -35,10 +35,12 @@ namespace B15_Ex01_5
             char minValue = inputFromUser.Min();
             char maxValue = inputFromUser.Max();
 
-            Console.WriteLine("Number Greater than 1st: {0} ", s_NumbersGreaterThanFirst);
-            Console.WriteLine("Number Smaller than 1st: {0} ", s_NumbersSmallerThanFirst);
-            Console.WriteLine("The min value is       : {0} ", minValue);
-            Console.WriteLine("The max value is       : {0} ", maxValue);
+            string resultOfProgram = string.Format(@"Number Greater than 1st: {0}
+Number Smaller than 1st: {1} 
+The min value is       : {2}
+The max value is       : {3}.
+Please press 'Enter' to exit..." ,s_NumbersGreaterThanFirst,s_NumbersSmallerThanFirst , minValue, maxValue);
+            Console.WriteLine(resultOfProgram);
             Console.ReadLine();
         }
 
@@ -105,12 +107,14 @@ namespace B15_Ex01_5
             for (int i = 1; i < i_StringOfNumbers.Length; i++)
             {
                 numberToCompare = getNumValue(i_StringOfNumbers[i]);
+                bool digitIsBiggerThanFirst = numberToCompare > firstNumber;
+                bool digitIsSmallerThanFirst = numberToCompare < firstNumber;
 
-                if (numberToCompare > firstNumber)
+                if (digitIsBiggerThanFirst)
                 {
                       s_NumbersGreaterThanFirst++;
                 }
-                else if (numberToCompare < firstNumber)
+                else if (digitIsSmallerThanFirst)
                 {
                       s_NumbersSmallerThanFirst++;
                 }

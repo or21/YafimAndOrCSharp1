@@ -1,11 +1,9 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Program.cs" company="B15_Ex01_3">
-// Yafim Vodkov 308973882 Or Brand id
+// Yafim Vodkov 308973882 Or Brand 302521034
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using System.ComponentModel.Design;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace B15_Ex01_3

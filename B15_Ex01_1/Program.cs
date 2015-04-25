@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Program.cs" company="B15_Ex01_1">
-// Yafim Vodkov 308973882 Or Brand id
+// Yafim Vodkov 308973882 Or Brand 302521034
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
@@ -103,8 +103,10 @@ The avarege number of digits in the binary number is {8}.",
             {
                 string intAsString = Console.ReadLine();
                 bool isNumber = int.TryParse(intAsString, out o_ArrayOfInputs[i]);
+                bool isValidNumber = intAsString != null &&
+                                     (isNumber && (intAsString.Length == 3) && (o_ArrayOfInputs[i] > 0));
 
-                if (intAsString != null && (isNumber && (intAsString.Length == 3) && (o_ArrayOfInputs[i] > 0)))
+                if (isValidNumber)
                 {
                     i++;
                 }
