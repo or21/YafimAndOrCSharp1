@@ -65,7 +65,7 @@ The amount of chars that are camel case if the input contains just letters: {2}.
                     {
                         if (char.IsNumber(i_InputFromUser[i]))
                         {
-                            s_SumOfNumbersInString += getNumValue(i_InputFromUser[i]);
+                            s_SumOfNumbersInString += int.Parse(i_InputFromUser[i].ToString());
                         }
                         else
                         {
@@ -144,17 +144,6 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         {
             string reversedString = reverseString(i_String);
             return reversedString.Equals(i_String);
-        }
-
-        /// <summary>
-        /// get numerical value from char
-        /// </summary>
-        /// <param name="i_CharToNumericValue">char to convert</param>
-        /// <returns> char to integer </returns>
-        private static int getNumValue(char i_CharToNumericValue)
-        {
-            double numericValue = char.GetNumericValue(i_CharToNumericValue);
-            return Convert.ToInt32(numericValue);
         }
     }
 }

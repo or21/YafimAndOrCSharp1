@@ -4,7 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using System.Linq;
 
 namespace B15_Ex01_5
 {
@@ -14,32 +13,27 @@ namespace B15_Ex01_5
     public class Program
     {
         /// <summary>
-        /// how many numbers are greater than the first number in the strings
-        /// </summary>
-        private static int s_NumbersGreaterThanFirst = 0;
-
-        /// <summary>
-        /// how many numbers are smaller than the first number in the strings
-        /// </summary>
-        private static int s_NumbersSmallerThanFirst = 0;
-        
-        /// <summary>
         /// runs the program.
         /// </summary>
         public static void Main()
         {
             string inputFromUser = getInput();
-            countGreaterAndSmallerNumbers(inputFromUser);
+
+            int numbersGreaterThanFirst;
+            int numbersSmallerThanFirst;
+            
+            countGreaterAndSmallerNumbers(inputFromUser, out numbersGreaterThanFirst, out numbersSmallerThanFirst);
 
             // input user is valid, get minimum and maximum values from it.
-            char minValue = inputFromUser.Min();
-            char maxValue = inputFromUser.Max();
-
+            int minValue;
+            int maxValue;
+            
+            calculateMinAndMaxDigitsInString(inputFromUser, out minValue, out maxValue);
             string resultOfProgram = string.Format(@"Number Greater than 1st: {0}
 Number Smaller than 1st: {1} 
 The min value is       : {2}
 The max value is       : {3}.
-Please press 'Enter' to exit..." ,s_NumbersGreaterThanFirst,s_NumbersSmallerThanFirst , minValue, maxValue);
+Please press 'Enter' to exit..." ,numbersGreaterThanFirst,numbersSmallerThanFirst , minValue, maxValue);
             Console.WriteLine(resultOfProgram);
             Console.ReadLine();
         }
@@ -56,8 +50,11 @@ Please press 'Enter' to exit..." ,s_NumbersGreaterThanFirst,s_NumbersSmallerThan
             {
                 Console.WriteLine("Please enter 8 digit string: ");
                 inputFromUser = Console.ReadLine();
+                int inputAsInt;
+                bool isNumber = int.TryParse(inputFromUser, out inputAsInt);
+                bool isValidString = (inputFromUser != null) && (inputFromUser.Length == 8 && isNumber) && (inputAsInt > 0);
 
-                if (isValidString(inputFromUser))
+                if (isValidString)
                 {
                     break;
                 }
@@ -69,67 +66,51 @@ Please press 'Enter' to exit..." ,s_NumbersGreaterThanFirst,s_NumbersSmallerThan
         }
 
         /// <summary>
-        /// check if valid string was given
-        /// </summary>
-        /// <param name="i_StringToCheck">string to check</param>
-        /// <returns> true if valid string</returns>
-        private static bool isValidString(string i_StringToCheck)
-        {
-            return i_StringToCheck.Length == 8 && containsOnlyNumbers(i_StringToCheck);
-        }
-
-        /// <summary>
-        /// check if string contains only numbers
-        /// </summary>
-        /// <param name="i_StringToCheck">string to check</param>
-        /// <returns> true if contains only numbers </returns>
-        private static bool containsOnlyNumbers(string i_StringToCheck)
-        {
-            bool isNumber = false;
-
-            for (int i = 0; i < i_StringToCheck.Length; i++)
-            {
-                isNumber = char.IsNumber(i_StringToCheck[i]);
-            }
-
-            return isNumber;
-        }
-
-        /// <summary>
         /// counts how many numbers greater and smaller than first number
         /// </summary>
         /// <param name="i_StringOfNumbers">string to check</param>
-        private static void countGreaterAndSmallerNumbers(string i_StringOfNumbers)
+        /// <param name="o_NumbersGreaterThanFirst"></param>
+        /// <param name="o_NumbersSmallerThanFirst"></param>
+        private static void countGreaterAndSmallerNumbers(string i_StringOfNumbers, out int o_NumbersGreaterThanFirst, out int o_NumbersSmallerThanFirst)
         {
-            int numberToCompare;
-            int firstNumber = getNumValue(i_StringOfNumbers[0]);
+            int firstNumber = int.Parse(i_StringOfNumbers[0].ToString());
+            o_NumbersSmallerThanFirst = 0;
+            o_NumbersGreaterThanFirst = 0;
 
             for (int i = 1; i < i_StringOfNumbers.Length; i++)
             {
-                numberToCompare = getNumValue(i_StringOfNumbers[i]);
+                int numberToCompare = int.Parse(i_StringOfNumbers[i].ToString());
                 bool digitIsBiggerThanFirst = numberToCompare > firstNumber;
                 bool digitIsSmallerThanFirst = numberToCompare < firstNumber;
 
                 if (digitIsBiggerThanFirst)
                 {
-                      s_NumbersGreaterThanFirst++;
+                    o_NumbersGreaterThanFirst++;
                 }
                 else if (digitIsSmallerThanFirst)
                 {
-                      s_NumbersSmallerThanFirst++;
+                    o_NumbersSmallerThanFirst++;
                 }
             }
         }
 
         /// <summary>
-        /// get numerical value from char
+        /// Calculates the minimum digit and maximum digit in a string of digits. 
+        /// The string must be numbers - not checked in the method.
         /// </summary>
-        /// <param name="i_CharToNumericValue">char to convert</param>
-        /// <returns> char to integer </returns>
-        private static int getNumValue(char i_CharToNumericValue)
+        /// <param name="i_InputString"></param>
+        /// <param name="o_MinNumber"></param>
+        /// <param name="o_MaxNumber"></param>
+        private static void calculateMinAndMaxDigitsInString(string i_InputString, out int o_MinNumber, out int o_MaxNumber)
         {
-            double numericValue = char.GetNumericValue(i_CharToNumericValue);
-            return Convert.ToInt32(numericValue);
+            char[] inputAsArray = i_InputString.ToCharArray();
+            o_MinNumber = int.Parse(inputAsArray[0].ToString());
+            o_MaxNumber = int.Parse(inputAsArray[0].ToString());
+            for (int i = 0; i < i_InputString.Length; i++)
+            {
+                o_MaxNumber = Math.Max(o_MaxNumber, int.Parse(inputAsArray[i].ToString()));
+                o_MinNumber = Math.Min(o_MinNumber, int.Parse(inputAsArray[i].ToString()));
+            }
         }
     }
 }
