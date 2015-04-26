@@ -21,71 +21,139 @@ namespace B15_Ex01_1
         {
             int numberOfInputs = 5;
             int[] arrayOfInputs;
-            int numberOfIncreasingNumbers = 0;
-            int numberOfDecreasingNumbers = 0;
+            int numberOfIncreasingNumbers;
+            int numberOfDecreasingNumbers;
             decimal avarageOfinputs = 0;
-            const bool v_Increasing = true;
-            int totalNumberOfBinaryDigits = 0;
-            decimal avarageBinaryDigits = 0;
+            decimal avarageBinaryDigits;
 
             // get the input from the user
             getInputFromUser(numberOfInputs, out arrayOfInputs);
 
             // convert to binary representation
             string[] inputsAsBinaryRepresentation = intToBinary(arrayOfInputs);
-
-            // finds number of ascending sequences
-            for (int i = 0; i < numberOfInputs; i++)
-            {
-                if (isStrictlySequecne(arrayOfInputs[i], v_Increasing))
-                {
-                    numberOfIncreasingNumbers++;
-                }
-            }
-
-            // finds number of descending sequences
-            for (int i = 0; i < numberOfInputs; i++)
-            {
-                if (isStrictlySequecne(arrayOfInputs[i], !v_Increasing))
-                {
-                    numberOfDecreasingNumbers++;
-                }
-            }
+            numberOfAscendingNumbers(numberOfInputs, arrayOfInputs, out numberOfIncreasingNumbers);
+            numberOfDescendingNumbers(numberOfInputs, arrayOfInputs, out numberOfDecreasingNumbers);
 
             // calculates the avarage of the input numbers
-            if (arrayOfInputs != null)
+            bool arrayIsNull = arrayOfInputs == null;
+            if (!arrayIsNull)
             {
                 avarageOfinputs = (decimal) arrayOfInputs.Sum() / arrayOfInputs.Length;
             }
 
-            // count number of binary digits
-            for (int i = 0; i < numberOfInputs; i++)
-            {
-                totalNumberOfBinaryDigits += inputsAsBinaryRepresentation[i].Length;
-                if (i + 1 == numberOfInputs)
-                {
-                    avarageBinaryDigits = (decimal) totalNumberOfBinaryDigits / numberOfInputs;
-                }
-            }
+            avarageNumberOfBinaryDigits(numberOfInputs, inputsAsBinaryRepresentation, out avarageBinaryDigits);
+            printResult(
+                inputsAsBinaryRepresentation, 
+                numberOfIncreasingNumbers, 
+                numberOfDecreasingNumbers, 
+                avarageOfinputs, 
+                avarageBinaryDigits);
+        }
 
-            // create the result that will be printed to the screen
+        /// <summary>
+        /// create the result that will be printed to the screen
+        /// </summary>
+        /// <param name="i_InputsAsBinaryRepresentation"></param>
+        /// <param name="i_NumberOfIncreasingNumbers"></param>
+        /// <param name="i_NumberOfDecreasingNumbers"></param>
+        /// <param name="i_AvarageOfinputs"></param>
+        /// <param name="i_AvarageBinaryDigits"></param>
+        private static void printResult(
+            string[] i_InputsAsBinaryRepresentation, 
+            int i_NumberOfIncreasingNumbers, 
+            int i_NumberOfDecreasingNumbers, 
+            decimal i_AvarageOfinputs, 
+            decimal i_AvarageBinaryDigits)
+        {
             string resultOfProgram = string.Format(
 @"The binary numbers are: {0} {1} {2} {3} {4}.
 There are {5} numbers which are an ascending series and {6} which are descending.
 The general avarege of the inserted numbers is {7}.
-The avarege number of digits in the binary number is {8}.", 
-                                                          inputsAsBinaryRepresentation[0], 
-                                                          inputsAsBinaryRepresentation[1], 
-                                                          inputsAsBinaryRepresentation[2], 
-                                                          inputsAsBinaryRepresentation[3], 
-                                                          inputsAsBinaryRepresentation[4], 
-                                                          numberOfIncreasingNumbers, 
-                                                          numberOfDecreasingNumbers, 
-                                                          avarageOfinputs, 
-                                                          avarageBinaryDigits);
+The avarege number of digits in the binary number is {8}.",
+                i_InputsAsBinaryRepresentation[0],
+                i_InputsAsBinaryRepresentation[1],
+                i_InputsAsBinaryRepresentation[2],
+                i_InputsAsBinaryRepresentation[3],
+                i_InputsAsBinaryRepresentation[4],
+                i_NumberOfIncreasingNumbers,
+                i_NumberOfDecreasingNumbers,
+                i_AvarageOfinputs,
+                i_AvarageBinaryDigits);
+
             Console.WriteLine(resultOfProgram);
             Console.WriteLine("Please press 'Enter' to exit...");
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Count number of binary digits
+        /// </summary>
+        /// <param name="i_NumberOfInputs">The amount of inputs the user has entered</param>
+        /// <param name="i_InputsAsBinaryRepresentation">The users input as a binary representation</param>
+        /// <param name="o_AvarageBinaryDigits">The average amount of digits in the binary formated numbers</param>
+        private static void avarageNumberOfBinaryDigits(
+            int i_NumberOfInputs, 
+            string[] i_InputsAsBinaryRepresentation, 
+            out decimal o_AvarageBinaryDigits)
+        {
+            o_AvarageBinaryDigits = 0;
+            int totalNumberOfBinaryDigits = 0;
+            for (int index = 0; index < i_NumberOfInputs; index++)
+            {
+                totalNumberOfBinaryDigits += i_InputsAsBinaryRepresentation[index].Length;
+                bool numberOfInputsIsIPlusOne = index + 1 == i_NumberOfInputs;
+                if (numberOfInputsIsIPlusOne)
+                {
+                    o_AvarageBinaryDigits = (decimal)totalNumberOfBinaryDigits / i_NumberOfInputs;
+                }
+            }
+        }
+
+        /// <summary>
+        /// finds number of descending sequences
+        /// </summary>
+        /// <param name="i_NumberOfInputs"></param>
+        /// <param name="i_ArrayOfInputs"></param>
+        /// <param name="o_NumberOfDecreasingNumbers"></param>
+        private static void numberOfDescendingNumbers(
+            int i_NumberOfInputs, 
+            int[] i_ArrayOfInputs, 
+            out int o_NumberOfDecreasingNumbers)
+        {
+            o_NumberOfDecreasingNumbers = 0;
+            const bool v_Ascending = false;
+            for (int i = 0; i < i_NumberOfInputs; i++)
+            {
+                bool isSequence = isStrictlySequecne(i_ArrayOfInputs[i], v_Ascending);
+                if (isSequence)
+                {
+                    o_NumberOfDecreasingNumbers++;
+                }
+            }
+        }
+
+        /// <summary>
+        ///  finds number of ascending sequences
+        /// </summary>
+        /// <param name="i_NumberOfInputs"></param>
+        /// <param name="i_ArrayOfInputs"></param>
+        /// <param name="o_NumberOfIncreasingNumbers"></param>
+        /// <returns></returns>
+        private static void numberOfAscendingNumbers(
+            int i_NumberOfInputs, 
+            int[] i_ArrayOfInputs, 
+            out int o_NumberOfIncreasingNumbers)
+        {
+            o_NumberOfIncreasingNumbers = 0;
+            const bool v_Ascending = true;
+            for (int i = 0; i < i_NumberOfInputs; i++)
+            {
+                bool isSequence = isStrictlySequecne(i_ArrayOfInputs[i], v_Ascending);
+                if (isSequence)
+                {
+                    o_NumberOfIncreasingNumbers++;
+                }
+            }
         }
 
         /// <summary>
@@ -95,20 +163,22 @@ The avarege number of digits in the binary number is {8}.",
         /// <param name="o_ArrayOfInputs">the array of inputs</param>
         private static void getInputFromUser(int i_NumberOfInputs, out int[] o_ArrayOfInputs)
         {
-            int i = 0;
+            int totalUserInputs = 0;
             o_ArrayOfInputs = new int[i_NumberOfInputs];
 
             Console.WriteLine("Please enter 5 numbers with 3 digits each (press enter after each one):");
-            while (i < i_NumberOfInputs)
+            while (totalUserInputs < i_NumberOfInputs)
             {
                 string intAsString = Console.ReadLine();
-                bool isNumber = int.TryParse(intAsString, out o_ArrayOfInputs[i]);
+                bool isNumber = int.TryParse(intAsString, out o_ArrayOfInputs[totalUserInputs]);
                 bool isValidNumber = intAsString != null &&
-                                     (isNumber && (intAsString.Length == 3) && (o_ArrayOfInputs[i] > 0));
+                                     isNumber && 
+                                     intAsString.Length == 3 && 
+                                     o_ArrayOfInputs[totalUserInputs] > 0;
 
                 if (isValidNumber)
                 {
-                    i++;
+                    totalUserInputs++;
                 }
                 else
                 {
@@ -154,29 +224,29 @@ The avarege number of digits in the binary number is {8}.",
         {
             int[] numberAsArray = numberToIntArray(i_NumberToCheck);
             int previousDigit = numberAsArray[0];
+            bool returnValue = true;
 
             for (int i = 1; i < numberAsArray.Length; i++)
             {
                 int currentDigit = numberAsArray[i];
-                if (i_Operation)
+                
+                // defines the operation and the expected result
+                bool checkAscenOrDesc = (i_Operation && 
+                    (!(previousDigit > currentDigit))) ||
+                    (!i_Operation && 
+                    (!(previousDigit < currentDigit)));
+                
+                // if the condition is true it means that the sequence is not stricty asending or descening
+                if (checkAscenOrDesc)
                 {
-                    if (!(previousDigit > currentDigit))
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    if (!(previousDigit < currentDigit))
-                    {
-                        return false;
-                    }
+                    returnValue = false;
+                    break;
                 }
 
                 previousDigit = currentDigit;
             }
 
-            return true;
+            return returnValue;
         }
 
         /// <summary>

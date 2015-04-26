@@ -18,10 +18,8 @@ namespace B15_Ex01_5
         public static void Main()
         {
             string inputFromUser = getInput();
-
             int numbersGreaterThanFirst;
             int numbersSmallerThanFirst;
-            
             countGreaterAndSmallerNumbers(inputFromUser, out numbersGreaterThanFirst, out numbersSmallerThanFirst);
 
             // input user is valid, get minimum and maximum values from it.
@@ -29,11 +27,17 @@ namespace B15_Ex01_5
             int maxValue;
             
             calculateMinAndMaxDigitsInString(inputFromUser, out minValue, out maxValue);
-            string resultOfProgram = string.Format(@"Number Greater than 1st: {0}
+            string resultOfProgram = string.Format(
+@"Number Greater than 1st: {0}
 Number Smaller than 1st: {1} 
 The min value is       : {2}
 The max value is       : {3}.
-Please press 'Enter' to exit..." ,numbersGreaterThanFirst,numbersSmallerThanFirst , minValue, maxValue);
+Please press 'Enter' to exit..." ,
+                                 numbersGreaterThanFirst,
+                                 numbersSmallerThanFirst ,
+                                 minValue, 
+                                 maxValue);
+
             Console.WriteLine(resultOfProgram);
             Console.ReadLine();
         }
@@ -45,14 +49,17 @@ Please press 'Enter' to exit..." ,numbersGreaterThanFirst,numbersSmallerThanFirs
         private static string getInput()
         {
             string inputFromUser;
-
-            while (true)
+            const bool v_GettingInput = true;
+            while (v_GettingInput)
             {
                 Console.WriteLine("Please enter 8 digit string: ");
                 inputFromUser = Console.ReadLine();
                 int inputAsInt;
                 bool isNumber = int.TryParse(inputFromUser, out inputAsInt);
-                bool isValidString = (inputFromUser != null) && (inputFromUser.Length == 8 && isNumber) && (inputAsInt > 0);
+                bool isValidString = (inputFromUser != null) && 
+                    (inputFromUser.Length == 8 && 
+                    isNumber) && 
+                    (inputAsInt > 0);
 
                 if (isValidString)
                 {
@@ -71,7 +78,10 @@ Please press 'Enter' to exit..." ,numbersGreaterThanFirst,numbersSmallerThanFirs
         /// <param name="i_StringOfNumbers">string to check</param>
         /// <param name="o_NumbersGreaterThanFirst"></param>
         /// <param name="o_NumbersSmallerThanFirst"></param>
-        private static void countGreaterAndSmallerNumbers(string i_StringOfNumbers, out int o_NumbersGreaterThanFirst, out int o_NumbersSmallerThanFirst)
+        private static void countGreaterAndSmallerNumbers(
+            string i_StringOfNumbers, 
+            out int o_NumbersGreaterThanFirst, 
+            out int o_NumbersSmallerThanFirst)
         {
             int firstNumber = int.Parse(i_StringOfNumbers[0].ToString());
             o_NumbersSmallerThanFirst = 0;

@@ -15,12 +15,12 @@ namespace B15_Ex01_4
         /// <summary>
         /// sum of all numbers in string
         /// </summary>
-        private static int s_SumOfNumbersInString;
+        private static int s_sumOfNumbersInString;
 
         /// <summary>
         /// sum of all camel cases in string
         /// </summary>
-        private static int s_SumOfCamelInString;
+        private static int s_sumOfCamelInString;
 
         /// <summary>
         /// runs the program
@@ -34,8 +34,8 @@ namespace B15_Ex01_4
 The sum of the digits if the input contains just digits: {1}.
 The amount of chars that are camel case if the input contains just letters: {2}.",
             isPalindrome(inputFromUser),
-            s_SumOfNumbersInString,
-            s_SumOfCamelInString);
+            s_sumOfNumbersInString,
+            s_sumOfCamelInString);
 
             Console.WriteLine(resultOfProgram);
             Console.WriteLine("Please press 'Enter' to exit...");
@@ -50,8 +50,8 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         private static bool isValidString(string i_InputFromUser)
         {
             bool isValidString = false;
-
-            if (i_InputFromUser.Length == 10)
+            bool validLength = i_InputFromUser.Length == 10;
+            if (validLength)
             {
                 isValidString = true;
 
@@ -63,23 +63,26 @@ The amount of chars that are camel case if the input contains just letters: {2}.
                     // if contains only numbers, sum them. Otherwise error.
                     if (containsNumbers)
                     {
-                        if (char.IsNumber(i_InputFromUser[i]))
+                        bool charIsNumer = char.IsNumber(i_InputFromUser[i]);
+                        if (charIsNumer)
                         {
-                            s_SumOfNumbersInString += int.Parse(i_InputFromUser[i].ToString());
+                            s_sumOfNumbersInString += int.Parse(i_InputFromUser[i].ToString());
                         }
                         else
                         {
                             isValidString = false;
+                            break;
                         }
                     }
                     else
                     {
                         isValidString = isValidChar(i_InputFromUser[i]);
-                        
+                        bool charIsUpperCase = char.IsUpper(i_InputFromUser[i]);
+
                         // sum all the camel cases in string.
-                        if (char.IsUpper(i_InputFromUser[i]))
+                        if (charIsUpperCase)
                         {
-                            s_SumOfCamelInString++;
+                            s_sumOfCamelInString++;
                         }
                     }
                 }
@@ -95,7 +98,10 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         /// <returns>true if valid</returns>
         private static bool isValidChar(char i_CharToCheck)
         {
-            return (i_CharToCheck >= 'A' && i_CharToCheck <= 'Z') || (i_CharToCheck >= 'a' && i_CharToCheck <= 'z');
+            return (i_CharToCheck >= 'A' && 
+                i_CharToCheck <= 'Z') ||
+                (i_CharToCheck >= 'a' && 
+                i_CharToCheck <= 'z');
         }
 
         /// <summary>
@@ -105,13 +111,13 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         private static string getInputFromUser()
         {
             string inputFromUser;
-
-            while (true)
+            const bool v_GettingInput = true;
+            while (v_GettingInput)
             {
                 Console.WriteLine("Please enter a string with 10 chars");
                 inputFromUser = Console.ReadLine();
-
-                if (isValidString(inputFromUser))
+                bool checkIfStringIsValid = isValidString(inputFromUser);
+                if (checkIfStringIsValid)
                 {
                     break;
                 }
@@ -143,6 +149,7 @@ The amount of chars that are camel case if the input contains just letters: {2}.
         private static bool isPalindrome(string i_String)
         {
             string reversedString = reverseString(i_String);
+
             return reversedString.Equals(i_String);
         }
     }

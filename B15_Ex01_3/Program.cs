@@ -19,14 +19,16 @@ namespace B15_Ex01_3
         public static void Main()
         {
             int levelsAsInt;
-            
+
             Console.WriteLine("Please enter the number of levels in sand watch (then press enter):");
 
             // gets a valid input number from the user
             getNumberFromUser(out levelsAsInt);
 
+            bool levelFromProgram2 = levelsAsInt == 5;
+
             // prints the sand watch according to the number. 
-            if (levelsAsInt == 5)
+            if (levelFromProgram2)
             {
                 B15_Ex01_2.Program.Main();
             }
@@ -77,12 +79,17 @@ namespace B15_Ex01_3
                     numberOfDots += 2;
                 }
 
-                if (numberOfDots == 1)
+                bool halfWay = numberOfDots == 1;
+                if (halfWay)
                 {
                     isBeforeHalf = false;
                 }
 
-                finalSandWatch.Append(Environment.NewLine);
+                bool notLastLine = i != i_NumberOfLevels - 1;
+                if (notLastLine)
+                {
+                    finalSandWatch.Append(Environment.NewLine);
+                }
             }
 
             return finalSandWatch.ToString();
@@ -100,7 +107,10 @@ namespace B15_Ex01_3
             {
                 string levelsAsString = Console.ReadLine();
                 bool isNumber = int.TryParse(levelsAsString, out levelsAsInt);
-                if ((levelsAsString != null) && isNumber && (levelsAsInt > 0))
+                bool checkLevelFromUser = (levelsAsString != null) && 
+                    isNumber && 
+                    (levelsAsInt > 0);
+                if (checkLevelFromUser)
                 {
                     isGoodNumber = true;
                 }
